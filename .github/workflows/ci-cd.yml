@@ -1,63 +1,29 @@
-name: CI/CD Pipeline for ToDo App
+deploy:
+  runs-on: ubuntu-latest
+  needs: build-and-test
 
-# Trigger the workflow on push or pull request to the main branch
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
 
-    steps:
-      # Step 1: Check out the code
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+    # Step 4: Build the project
+    - name: Build the project
+      run: npm run build
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run tests
-      - name: Run Jest tests
-        run: npm test
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-
-    steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Build the project
-      - name: Build the project
-        run: npm run build
-
-      # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+    # Step 5: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
