@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>ToDo App</h1>
+      <h1>ToDo App Samrudh Sivva</h1>
       <input
         type="text"
         value={task}

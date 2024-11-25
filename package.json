@@ -9,11 +9,15 @@
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://samrudhsivva/.github.io/TaskManager.git",
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+      "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -21,6 +25,7 @@
       "react-app/jest"
     ]
   },
+  
   "browserslist": {
     "production": [
       ">0.2%",
@@ -37,6 +42,7 @@
     "@babel/preset-react": "^7.25.9",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
+    "gh-pages": "^6.2.0",
     "jest": "^27.5.1",
     "jest-environment-jsdom": "^27.5.1"
   },
